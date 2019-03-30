@@ -1,0 +1,49 @@
+.s{
+	color: green;
+}
+.e{
+	width: 100%;
+	height: 100px;
+	background-color: green;
+}
+
+.r{
+	.e;
+	background-color: red;
+}
+.h
+{
+	
+	background-color: black;
+
+}
+body{
+	margin: 0 0;
+}
+
+
+
+@column-name: col; // Префикс класса сетки
+@column-count: 4;  // Количество классов
+
+.generate-column(@i: 1) when (@i =< @column-count) {
+
+@n: @column-count - @i + 1;
+  .@{column-name}-@{n} {
+    width: @i * (100% / @column-count);
+    float: left;
+  }
+
+  .generate-column(@i + 1);
+}
+
+.generate-column();
+
+.text{
+	font-size: 80px;
+	color: red;
+}
+.text2{
+	.text;
+
+}
