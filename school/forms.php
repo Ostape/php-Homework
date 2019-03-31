@@ -1,22 +1,23 @@
 <?php
 require_once 'connection.php';
 
-$link = mysqli_connect($host, $user, $password, $database)
-or die("Ошибка " . mysqli_error($link));
+//$link = mysqli_connect($host, $user, $password, $database)
+//or die("Ошибка " . mysqli_error($link));
+//
+//mysqli_select_db($link, $database);
+//
 
-mysqli_select_db($link, $database);
 
 if(isset($_POST['username'])){
 
     $uname=$_POST['username'];
     $password=$_POST['password'];
+    $dbh = new Dbh;
+    //$stmt = "select * from login_form where User='".$uname."'AND Pass='".$password."' limit 1";
+    $stmt = $dbh->connect()->prepare("SELECT * FROM login_form WHERE User=? AND Pass=?");
+    $stmt->execute([$uname, $password]);
 
-    $query="select * from login_form where User='".$uname."'AND Pass='".$password."' limit 1";
-
-    $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link ));
-
-
-    if(mysqli_num_rows($result)==1){
+    if($stmt->fetch()){
         echo " You Have Successfully Logged in";
         exit();
     }
