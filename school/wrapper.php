@@ -48,46 +48,28 @@ class Wrapper{
         return count(array_filter(array_keys($arr), 'is_string')) > 0;
     }
 
-
-    private function replaceChar($searchedChar, $replacedChar, $stringInWhatReplaced){
-        $position = strpos($stringInWhatReplaced, $searchedChar);
-        if ($position!==false){
-            return substr_replace($stringInWhatReplaced,$replacedChar,$position,strlen($searchedChar));
-        }
-        else{
-            return $stringInWhatReplaced;
-        }
-    }
-
-
     public function exc($query, $arguments){
         $result = $query;
 
-        $count = count_chars($query, 1)[58];
-        if($count>count($arguments)){
-            return "Not enought arguments";
-        }
-
-
         if ($this->is_assoc($arguments)){
-            foreach ($arguments as $key => $argument){
-                $result = str_replace(":$key", "$argument", "$query");
+            foreach ($arguments as $keyword => $argument){
+                $result = str_replace(":$keyword", "$argument", "$query");
             }
         }
         else {
-            foreach ($arguments as $argument){
-                $result = $this->replaceChar("?", "$argument", "$query");
+            foreach ($arguments as  $argument){
+                $result = str_replace("?", "$argument", "$query");
             }
         }
         return $result;
     }
 
 
-    public function query($query, $arguments, $debug=0){
+    public function prepared($query, $arguments, $debug=0){
         try{
             $sth = $this->link->prepare($query);
         } catch(PDOException $e){
-            echo '<br>Ошибка выполнения запроса: '.$e->getMessage();
+            echo "Error query: ".$e->getMessage();
         }
 
         if ($debug===1){
