@@ -1,17 +1,17 @@
 <?php
-//require_once 'connection.php';
+require_once 'connection.php';
 
-require_once 'wrapper.php';
+//require_once 'wrapper.php';
 
 if(isset($_POST['username'])){
 
     $uname=$_POST['username'];
     $password=$_POST['password'];
-//    $dbh = new Dbh;
-//    $stmt = $dbh->connect()->prepare("SELECT * FROM login_form WHERE User=? AND Pass=?");
-//    $stmt->execute([$uname, $password]);
-    $dbh = new Wrapper("localhost", "secret_data_site", "","root","utf8mb4");
-    $stmt=$dbh->prepared("SELECT * FROM login_form WHERE User=? AND Pass=?", [$uname, $password]);
+    $dbh = new Dbh;
+    $stmt = $dbh->connect()->prepare("SELECT * FROM login_form WHERE User=? AND Pass=?");
+    $stmt->execute([$uname, $password]);
+   // $dbh = new Wrapper("localhost", "secret_data_site", "","root","utf8mb4");
+   // $stmt=$dbh->prepared("SELECT * FROM login_form WHERE User=? AND Pass=?", [$uname, $password]);
     if($stmt->fetch()){
         echo " You Have Successfully Logged in";
         exit();

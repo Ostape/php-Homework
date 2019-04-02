@@ -32,7 +32,7 @@
                 <li><a href="#">Вчителям</a></li>
                 <li><a href="#">Учням</a></li>
                 <li><a href="#">Блоги вчителів</a></li>
-                <li><a href="#">Історія школи</a></li>
+                <li><a href="?page=in">Історія школи</a></li>
                 <li><a href="?page=forms">Увійти</a></li>
             </ul>
             <a href="#"> <div class="hamburger" onclick="toggleMenu();"></div></a>
@@ -87,7 +87,7 @@
 
             <div style="float: right; width: 105px; height: 100%;">
                 <li><a href="#" class="text_btn_desk" >Блоги вчителів</a></li>
-                <li class="l">	<a href="#" class="text_btn_desk" >Історія школи</a></li>
+                <li class="l">	<a href="?page=in" class="text_btn_desk" >Історія школи</a></li>
                 <li class="l">	<a href="?page=forms" class="text_btn_desk" >Увійти</a></li>
             </div>
 

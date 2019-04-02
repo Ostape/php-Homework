@@ -8,7 +8,7 @@ class Wrapper{
     private $charset;
 
 
-    public function __construct($host, $dbname, $password, $username, $charset){
+    public function __construct($host="localhost", $dbname, $password="", $username="root", $charset="utf8mb4"){
         $this->link = $this->connect($host,$dbname,$password,$username, $charset);
         $this->dbname = $dbname;
         $this->host = $host;
@@ -77,6 +77,17 @@ class Wrapper{
         }
 
         $sth->execute($arguments);
+        return $sth;
+    }
+
+    public function getData($query){
+        try{
+            $sth = $this->link->prepare($query);
+
+        } catch(PDOException $e){
+            echo "Error query: ".$e->getMessage();
+        }
+        $sth->execute();
         return $sth;
     }
 }
